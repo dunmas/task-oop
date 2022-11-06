@@ -133,7 +133,9 @@ def calc_avg_course_rate_stud(students_list, course):
 
     for student in students_list:
         grades_count += len(student.grades[course])
-        grades_count += sum(student.grades[course])
+        grades_sum += sum(student.grades[course])
+
+    return round(grades_sum / grades_count, 2)
 
 
 def calc_avg_course_rate_lect(lecturers_list, course):
@@ -142,7 +144,9 @@ def calc_avg_course_rate_lect(lecturers_list, course):
 
     for lecturer in lecturers_list:
         grades_count += len(lecturer.grades[course])
-        grades_count += sum(lecturer.grades[course])
+        grades_sum += sum(lecturer.grades[course])
+
+    return round(grades_sum / grades_count, 2)
 
 # ------- начало тестов -------
 
@@ -204,4 +208,7 @@ elif lecturer_1 > lecturer_2:
     print("lec_1_gt_2")
 else:
     print("lec_eq")
+
+print(calc_avg_course_rate_lect(lecturers_list, 'Python'))
+print(calc_avg_course_rate_stud(students_list, 'Python'))
 
