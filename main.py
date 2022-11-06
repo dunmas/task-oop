@@ -6,6 +6,30 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
+        self.avg_rate = 0
+
+    def __str__(self):
+        courses_in_progress = ""
+        finished_courses = ""
+
+        # Делаем красивые списки курсов в одну строку
+        for pos, course in enumerate(self.courses_in_progress):
+            courses_in_progress += course
+
+            if pos != len(self.courses_in_progress) - 1:
+                courses_in_progress += ", "
+
+        for pos, course in enumerate(self.finished_courses):
+            finished_courses += course
+
+            if pos != len(self.finished_courses) - 1:
+                finished_courses += ", "
+
+        return (f"Имя: {self.name}\n"
+                f"Фамилия: {self.surname}\n"
+                f"Средняя оценка: {self.avg_rate}\n"
+                f"Курсы в процессе изучения: {courses_in_progress}\n"
+                f"Завершенные курсы: {finished_courses}\n")
 
     def rate_lecturer(self, lecturer, course, grade):
         if isinstance(lecturer, Lecturer) and course in self.courses_in_progress and \
@@ -54,5 +78,5 @@ cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 
-print(best_student.grades)
+print(best_student)
 
