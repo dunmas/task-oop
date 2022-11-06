@@ -126,6 +126,24 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
+
+def calc_avg_course_rate_stud(students_list, course):
+    grades_sum = 0
+    grades_count = 0
+
+    for student in students_list:
+        grades_count += len(student.grades[course])
+        grades_count += sum(student.grades[course])
+
+
+def calc_avg_course_rate_lect(lecturers_list, course):
+    grades_sum = 0
+    grades_count = 0
+
+    for lecturer in lecturers_list:
+        grades_count += len(lecturer.grades[course])
+        grades_count += sum(lecturer.grades[course])
+
 # ------- начало тестов -------
 
 
@@ -139,11 +157,14 @@ student_2.courses_in_progress += ['Python']
 student_2.finished_courses += ['Git']
 student_2.finished_courses += ['C++']
 
+students_list = [student_1, student_2]
+
 mentor_1 = Reviewer('Some', 'Buddy')
 mentor_1.courses_attached += ['Python']
 
 mentor_2 = Reviewer('Once', 'Toldme')
 mentor_2.courses_attached += ['Git']
+mentor_2.courses_attached += ['Python']
 
 lecturer_1 = Lecturer('Vova', 'Vovin')
 lecturer_1.courses_attached += ['Python']
@@ -151,9 +172,12 @@ lecturer_1.courses_attached += ['Python']
 lecturer_2 = Lecturer('Peter', 'Parker')
 lecturer_2.courses_attached += ['Python']
 
-mentor_1.rate_hw(student_2, 'Python', 6)
+lecturers_list = [lecturer_1, lecturer_2]
+
+mentor_1.rate_hw(student_2, 'Python', 9)
 mentor_1.rate_hw(student_2, 'Python', 8)
 mentor_2.rate_hw(student_1, 'Git', 7)
+mentor_2.rate_hw(student_1, 'Python', 8)
 
 student_1.rate_lecturer(lecturer_1, 'Python', 10)
 student_1.rate_lecturer(lecturer_2, 'Python', 5)
@@ -164,15 +188,20 @@ print(student_2)
 print(student_1)
 print(mentor_1)
 print(lecturer_1)
+print(lecturer_2)
 print('--------------')
 
-# есть равенство, сработает следующий if
 if student_1 < student_2:
     print("stud_1_lt_2")
-
-if student_1 == student_2:
+elif student_1 > student_2:
+    print("stud_1_gt_2")
+else:
     print("stud_eq")
 
-if lecturer_1 > lecturer_2:
+if lecturer_1 < lecturer_2:
+    print("lec_1_lt_2")
+elif lecturer_1 > lecturer_2:
     print("lec_1_gt_2")
+else:
+    print("lec_eq")
 
