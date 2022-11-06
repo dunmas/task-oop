@@ -31,9 +31,15 @@ class Student:
                 f"Курсы в процессе изучения: {courses_in_progress}\n"
                 f"Завершенные курсы: {finished_courses}\n")
 
-    def __cmp__(self, other):
+    def __gt__(self, other):
         if isinstance(other, Student):
-            self.avg_rate - other.avg_rate
+            return self.avg_rate > other.avg_rate
+        else:
+            return "Ошибка"
+
+    def __eq__(self, other):
+        if isinstance(other, Student):
+            return self.avg_rate == other.avg_rate
         else:
             return "Ошибка"
 
@@ -83,9 +89,16 @@ class Lecturer(Mentor):
         return f"{super().__str__()}" \
                f"Средняя оценка: {self.avg_rate}\n"\
 
-    def __cmp__(self, other):
+
+    def __gt__(self, other):
         if isinstance(other, Lecturer):
-            self.avg_rate - other.avg_rate
+            return self.avg_rate > other.avg_rate
+        else:
+            return "Ошибка"
+
+    def __eq__(self, other):
+        if isinstance(other, Lecturer):
+            return self.avg_rate == other.avg_rate
         else:
             return "Ошибка"
 
@@ -114,21 +127,41 @@ class Reviewer(Mentor):
             return 'Ошибка'
 
 
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
-best_student.courses_in_progress += ['Delphi']
-best_student.courses_in_progress += ['Git']
+student_1 = Student('Ruoy', 'Eman', 'male')
+student_1.courses_in_progress += ['Python']
+student_1.courses_in_progress += ['Delphi']
+student_1.courses_in_progress += ['Git']
 
-cool_mentor = Reviewer('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
+student_2 = Student('Dan', 'Pustovgar', 'male')
+student_2.courses_in_progress += ['Python']
+student_2.finished_courses += ['Git']
+student_2.finished_courses += ['C++']
 
-cool_lecturer = Lecturer('Vova', 'Vovin')
+mentor_1 = Reviewer('Some', 'Buddy')
+mentor_1.courses_attached += ['Python']
 
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
+mentor_2 = Reviewer('Once', 'Toldme')
+mentor_2.courses_attached += ['Git']
 
-print(best_student)
-print(cool_mentor)
-print(cool_lecturer)
+lecturer_1 = Lecturer('Vova', 'Vovin')
+lecturer_1.courses_attached += ['Python']
+
+lecturer_2 = Lecturer('Peter', 'Parker')
+lecturer_2.courses_attached += ['Python']
+
+mentor_1.rate_hw(student_2, 'Python', 6)
+mentor_1.rate_hw(student_2, 'Python', 8)
+mentor_2.rate_hw(student_1, 'Git', 7)
+
+print(student_2)
+print(student_1)
+print(mentor_1)
+print(lecturer_1)
+
+# есть равенство, сработает следующий if
+if student_1 < student_2:
+    print("lt")
+
+if student_1 == student_2:
+    print("eq")
 
