@@ -211,4 +211,3 @@ else:
 
 print(calc_avg_course_rate_lect(lecturers_list, 'Python'))
 print(calc_avg_course_rate_stud(students_list, 'Python'))
-
