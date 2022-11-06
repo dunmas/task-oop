@@ -81,7 +81,13 @@ class Lecturer(Mentor):
     def __str__(self):
         super().__str__()
         return f"{super().__str__()}" \
-               f"Средняя оценка: {self.avg_rate}\n"
+               f"Средняя оценка: {self.avg_rate}\n"\
+
+    def __cmp__(self, other):
+        if isinstance(other, Lecturer):
+            self.avg_rate - other.avg_rate
+        else:
+            return "Ошибка"
 
     def calculate_avg_rate(self):
         grades_count = 0
