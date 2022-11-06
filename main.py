@@ -48,6 +48,8 @@ class Student:
                 lecturer.grades[course] += [grade]
             else:
                 lecturer.grades[course] = [grade]
+
+            lecturer.calculate_avg_rate()
         else:
             return 'Ошибка'
 
@@ -58,13 +60,22 @@ class Mentor:
         self.surname = surname
         self.courses_attached = []
 
+    def __str__(self):
+        return (f"Имя: {self.name}\n"
+                f"Фамилия: {self.surname}\n")
+
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
         self.grades = {}
         self.avg_rate = 0
         
-        super().__init__(self, name, surname)
+        super().__init__(name, surname)
+
+    def __str__(self):
+        super().__str__()
+        return f"{super().__str__()}" \
+               f"Средняя оценка: {self.avg_rate}\n"
 
     def calculate_avg_rate(self):
         grades_count = 0
@@ -93,13 +104,19 @@ class Reviewer(Mentor):
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
+best_student.courses_in_progress += ['Delphi']
+best_student.courses_in_progress += ['Git']
 
 cool_mentor = Reviewer('Some', 'Buddy')
 cool_mentor.courses_attached += ['Python']
+
+cool_lecturer = Lecturer('Vova', 'Vovin')
 
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 
 print(best_student)
+print(cool_mentor)
+print(cool_lecturer)
 
