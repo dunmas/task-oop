@@ -31,6 +31,16 @@ class Student:
                 f"Курсы в процессе изучения: {courses_in_progress}\n"
                 f"Завершенные курсы: {finished_courses}\n")
 
+    def calculate_avg_rate(self):
+        grades_count = 0
+        grades_sum = 0
+
+        for course in self.grades:
+            grades_count += len(self.grades[course])
+            grades_sum += sum(self.grades[course])
+
+        self.avg_rate = round(grades_sum / grades_count, 2)
+
     def rate_lecturer(self, lecturer, course, grade):
         if isinstance(lecturer, Lecturer) and course in self.courses_in_progress and \
                 course in lecturer.courses_attached:
@@ -64,6 +74,8 @@ class Reviewer(Mentor):
                 student.grades[course] += [grade]
             else:
                 student.grades[course] = [grade]
+
+            student.calculate_avg_rate()
         else:
             return 'Ошибка'
 
