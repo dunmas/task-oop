@@ -126,6 +126,8 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
+# ------- начало тестов -------
+
 
 student_1 = Student('Ruoy', 'Eman', 'male')
 student_1.courses_in_progress += ['Python']
@@ -153,15 +155,24 @@ mentor_1.rate_hw(student_2, 'Python', 6)
 mentor_1.rate_hw(student_2, 'Python', 8)
 mentor_2.rate_hw(student_1, 'Git', 7)
 
+student_1.rate_lecturer(lecturer_1, 'Python', 10)
+student_1.rate_lecturer(lecturer_2, 'Python', 5)
+student_2.rate_lecturer(lecturer_1, 'Python', 9)
+student_2.rate_lecturer(lecturer_2, 'Python', 6)
+
 print(student_2)
 print(student_1)
 print(mentor_1)
 print(lecturer_1)
+print('--------------')
 
 # есть равенство, сработает следующий if
 if student_1 < student_2:
-    print("lt")
+    print("stud_1_lt_2")
 
 if student_1 == student_2:
-    print("eq")
+    print("stud_eq")
+
+if lecturer_1 > lecturer_2:
+    print("lec_1_gt_2")
 
