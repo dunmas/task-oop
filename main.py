@@ -31,6 +31,12 @@ class Student:
                 f"Курсы в процессе изучения: {courses_in_progress}\n"
                 f"Завершенные курсы: {finished_courses}\n")
 
+    def __cmp__(self, other):
+        if isinstance(other, Student):
+            self.avg_rate - other.avg_rate
+        else:
+            return "Ошибка"
+
     def calculate_avg_rate(self):
         grades_count = 0
         grades_sum = 0
