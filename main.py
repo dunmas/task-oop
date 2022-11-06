@@ -62,8 +62,19 @@ class Mentor:
 class Lecturer(Mentor):
     def __init__(self, name, surname):
         self.grades = {}
+        self.avg_rate = 0
         
         super().__init__(self, name, surname)
+
+    def calculate_avg_rate(self):
+        grades_count = 0
+        grades_sum = 0
+
+        for course in self.grades:
+            grades_count += len(self.grades[course])
+            grades_sum += sum(self.grades[course])
+
+        self.avg_rate = round(grades_sum / grades_count, 2)
 
 
 class Reviewer(Mentor):
